@@ -4998,3 +4998,271 @@ footer {
     font-size: 10px;
   }
 }
+/* ============================================================
+   Alliances page
+   ============================================================ */
+.alliances-page {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1000;
+  overflow: hidden;
+  padding-block: 72px 96px;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, var(--bg-2) 0%, var(--surface) 55%, var(--bg) 100%);
+}
+
+.alliances-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(46, 232, 180, 0.16) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 35% at 0% 55%, rgba(77, 124, 255, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 35% at 100% 85%, rgba(46, 232, 180, 0.08) 0%, transparent 70%);
+}
+
+.alliances-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black, transparent 85%);
+}
+
+
+
+.alliances-back {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--text);
+  background: rgba(6, 20, 16, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line-strong);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.alliances-back:hover {
+  border-color: rgba(46, 232, 180, 0.45);
+  background: rgba(46, 232, 180, 0.1);
+}
+
+.alliances-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+}
+
+.alliances-head {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+
+.alliances-head .display.h1 {
+  font-size: clamp(34px, 5vw, 64px);
+}
+
+.alliances-lede {
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 60ch;
+  margin: 0;
+}
+
+
+
+
+.alliances-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.alliance-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(160deg, rgba(12, 16, 32, 0.85) 0%, rgba(6, 8, 16, 0.85) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.alliance-card:hover {
+  border-color: rgba(46, 232, 180, 0.35);
+  box-shadow: 0 30px 80px -40px rgba(46, 232, 180, 0.25);
+}
+
+.alliance-card.is-flipped { grid-template-columns: 1fr 1.1fr; }
+.alliance-card.is-flipped .alliance-photo { order: 2; }
+
+.alliance-photo {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.alliance-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.alliance-card:hover .alliance-photo img { transform: scale(1.03); }
+
+.alliance-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(3, 5, 8, 0.55) 100%);
+  pointer-events: none;
+}
+
+.alliance-index {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(3, 5, 8, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.alliance-body {
+  padding: clamp(24px, 3.5vw, 44px);
+  display: flex;
+  flex-direction: column;
+}
+
+.alliance-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.alliance-logo {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: var(--r-md);
+  background: #fff;
+}
+
+.alliance-logo img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.alliance-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(46, 232, 180, 0.35);
+  background: rgba(46, 232, 180, 0.06);
+}
+
+.alliance-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 2vw, 28px);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.alliance-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.alliance-location svg { color: var(--accent); }
+
+.alliance-desc p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin: 0 0 12px;
+}
+
+.alliance-desc p:last-child { margin-bottom: 0; }
+
+@media (max-width: 860px) {
+  .alliance-card,
+  .alliance-card.is-flipped { grid-template-columns: 1fr; }
+  .alliance-card.is-flipped .alliance-photo { order: 0; }
+  .alliance-photo { min-height: 0; aspect-ratio: 4 / 3; }
+  .alliances-page { padding-top: 72px; padding-bottom: 64px; }
+  .alliances-head { margin-bottom: 40px; }
+}
+
+@media (max-width: 600px) {
+  /* Back button scrolls with the page so it never covers the heading */
+  .alliances-back { position: absolute; top: 18px; left: 16px; }
+
+  .alliances-head { gap: 12px; margin-bottom: 32px; }
+  .alliances-head .display.h1 { font-size: clamp(30px, 9vw, 40px); }
+  .alliances-lede { font-size: 15px; }
+
+  .alliances-list { gap: 24px; }
+  .alliance-card { border-radius: var(--r-lg); }
+  .alliance-photo { aspect-ratio: 16 / 11; }
+  .alliance-index { left: 12px; bottom: 10px; font-size: 11px; }
+
+  .alliance-body { padding: 20px; }
+  .alliance-top { gap: 12px; margin-bottom: 18px; }
+  .alliance-logo { padding: 6px 10px; border-radius: 10px; }
+  .alliance-logo img { height: 34px; }
+  .alliance-tag { font-size: 9px; padding: 5px 10px; }
+
+  .alliance-name { font-size: 20px; }
+  .alliance-location { font-size: 10px; margin-bottom: 16px; }
+  .alliance-desc p { font-size: 14px; line-height: 1.65; }
+}

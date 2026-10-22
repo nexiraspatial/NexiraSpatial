@@ -1,5 +1,33 @@
 import { useRef, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Eyebrow } from '../components/Shared.jsx';
+
+const academicPartners = [
+    {
+        name: 'Universal Engineering College',
+        location: 'Thrissur, Kerala',
+        logo: '/alliances/universal-logo.png',
+        photo: '/alliances/universal-mou.jpg',
+        tag: 'Our First MoU',
+        description: [
+            'Nexira Spatial signed its first Memorandum of Understanding with Universal Engineering College, a step towards a closer partnership between industry and academia.',
+            'Under this partnership, Nexira Spatial will share its expertise in GIS, Remote Sensing and Spatial Technology, and give students hands-on exposure to real-world geospatial applications.',
+            'The signing ceremony was attended by the Principal and the Head of the Civil Engineering Department. Our team then held an interactive session with students on geospatial technology and career opportunities in the field.'
+        ]
+    },
+    {
+        name: 'Ilahia College of Engineering and Technology',
+        location: 'Muvattupuzha, Kerala',
+        logo: '/alliances/ilahia-logo.png',
+        photo: '/alliances/ilahia-mou.jpg',
+        tag: 'MoU Signed',
+        description: [
+            'Nexira Spatial has signed a Memorandum of Understanding with Ilahia College of Engineering and Technology, adding a second academic partner and widening our work with engineering institutions across Kerala.',
+            'The partnership is designed to give students access to current tools and workflows in GIS, Remote Sensing and Spatial Technology through knowledge-sharing sessions, practical training and project-based learning.',
+            'Together, we aim to prepare students for careers in the geospatial industry and to encourage research and innovation that address real-world challenges.'
+        ]
+    }
+];
 
 export function AlliancesPage({ onBack }) {
     const containerRef = useRef(null);
@@ -20,143 +48,90 @@ export function AlliancesPage({ onBack }) {
     }, []);
 
     return (
-        <section ref={containerRef} className="alliances-page" style={{
-            minHeight: '100vh',
-            background: '#000',
-            color: '#fff',
-            position: 'relative',
-            zIndex: 1000,
-            overflowX: 'hidden',
-            display: 'block'
-        }}>
-            {/* Grid Pattern */}
-            <div style={{
-                position: 'absolute',
-                inset: 0,
-                zIndex: 0,
-                backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-                maskImage: 'radial-gradient(ellipse at center, black, transparent 90%)',
-                opacity: 0.5,
-                pointerEvents: 'none'
-            }} />
+        <section ref={containerRef} className="alliances-page">
+            {/* Atmosphere: glows and grid */}
+            <div className="alliances-glow" aria-hidden="true" />
+            <div className="alliances-grid" aria-hidden="true" />
 
-            <div className="wrap" style={{
-                paddingTop: '0px',
-                paddingBottom: '60px',
-                position: 'relative',
-                zIndex: 10,
-                maxWidth: '1200px',
-                margin: '0 auto',
-                paddingLeft: 'var(--gutter)',
-                paddingRight: 'var(--gutter)'
-            }}>
+            {/* Back Button - Fixed Top Left */}
+            <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                onClick={onBack}
+                className="alliances-back"
+            >
+                <span style={{ fontSize: '12px' }}>←</span> HOME
+            </motion.button>
 
-                {/* Back Button - Fixed Top Left */}
-                <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    onClick={onBack}
-                    className="btn-ghost"
-                    style={{
-                        position: 'fixed',
-                        top: '15px',
-                        left: '15px',
-                        zIndex: 2000,
-                        padding: '6px 10px',
-                        borderRadius: '6px',
-                        fontSize: '9px',
-                        background: 'rgba(255,255,255,0.1)',
-                        backdropFilter: 'blur(10px)',
-                        border: '1px solid rgba(255,255,255,0.15)',
-                        color: '#fff',
-                        cursor: 'pointer',
-                        whiteSpace: 'nowrap',
-                        width: 'auto',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                    }}
-                >
-                    <span style={{ fontSize: '11px' }}>←</span> HOME
-                </motion.button>
-
-                {/* Hero Header */}
-                <div style={{ marginBottom: '20px', textAlign: 'center', marginTop: '-30px' }}>
+            <div className="wrap alliances-wrap">
+                {/* Header */}
+                <header className="alliances-head">
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                    >
+                        <Eyebrow style={{ justifyContent: 'center', fontSize: '13px' }}>Alliances</Eyebrow>
+                    </motion.div>
                     <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
+                        className="display h1"
+                        initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        style={{
-                            fontSize: 'clamp(48px, 10vw, 110px)',
-                            lineHeight: 0.85,
-                            fontFamily: '"Big Shoulders Display", sans-serif',
-                            fontWeight: 900,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.02em',
-                            color: '#fff',
-                            marginBottom: '32px'
-                        }}
                     >
-                        Nexira <br />
-                        <span style={{ color: 'rgba(46, 232, 180, 0.4)', fontSize: '0.6em', verticalAlign: 'middle', display: 'block', margin: '4px 0' }}>×</span>
-                        <span style={{ background: 'linear-gradient(90deg, #fff, #2ee8b4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Dot Cube Labs</span>
+                        Academic <span style={{ color: 'var(--accent)' }}>Partnerships</span>
                     </motion.h1>
-
                     <motion.p
+                        className="alliances-lede"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.3 }}
-                        style={{
-                            fontSize: 'clamp(16px, 1.4vw, 20px)',
-                            maxWidth: '650px',
-                            lineHeight: 1.6,
-                            color: 'rgba(255,255,255,0.65)',
-                            margin: '0 auto'
-                        }}
                     >
-                        Empowering the next generation of geospatial infrastructure. A joint venture dedicated to pioneering high-performance cloud solutions and AI-driven spatial intelligence.
+                        Memorandums of Understanding signed with academic institutions to bring industry, technology and education together.
                     </motion.p>
-                </div>
+                </header>
 
-                {/* Feature Grid - Restored Simpler Style */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                    gap: '24px',
-                    marginBottom: '80px'
-                }}>
-                    <div style={{
-                        background: 'rgba(255,255,255,0.03)',
-                        padding: '40px',
-                        borderRadius: '24px',
-                        border: '1px solid rgba(255,255,255,0.06)'
-                    }}>
-                        <h3 style={{ marginBottom: '20px', color: '#2ee8b4', fontSize: '24px', fontFamily: '"Outfit", sans-serif', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Partnership</h3>
-                        <p style={{ opacity: 0.6, fontSize: '16px', lineHeight: 1.7, color: '#fff' }}>
-                            By combining Nexira's deep domain expertise in GIS and remote sensing with Dot Cube Labs' cutting-edge cloud engineering, we deliver scalable solutions that transform raw data into actionable intelligence.
-                        </p>
-                    </div>
-                    <div style={{
-                        background: 'rgba(255,255,255,0.03)',
-                        padding: '40px',
-                        borderRadius: '24px',
-                        border: '1px solid rgba(255,255,255,0.06)'
-                    }}>
-                        <h3 style={{ marginBottom: '20px', color: '#2ee8b4', fontSize: '24px', fontFamily: '"Outfit", sans-serif', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Capabilities</h3>
-                        <ul style={{ paddingLeft: '20px', opacity: 0.6, fontSize: '16px', lineHeight: 1.8, color: '#fff' }}>
-                            <li style={{ marginBottom: '8px' }}>Cloud-Native Geospatial Pipelines</li>
-                            <li style={{ marginBottom: '8px' }}>Real-time Earth Observation Data</li>
-                            <li style={{ marginBottom: '8px' }}>AI-Enhanced Land Analysis</li>
-                            <li style={{ marginBottom: '8px' }}>Sustainable Digital Infrastructure</li>
-                        </ul>
-                    </div>
-                </div>
+                {/* Partner cards */}
+                <div className="alliances-list">
+                    {academicPartners.map((partner, i) => (
+                        <motion.article
+                            key={partner.name}
+                            className={`alliance-card${i % 2 ? ' is-flipped' : ''}`}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <div className="alliance-photo">
+                                <img src={partner.photo} alt={`MoU signing with ${partner.name}`} loading="lazy" />
+                                <span className="alliance-index">{String(i + 1).padStart(2, '0')}</span>
+                            </div>
 
-                <div style={{ textAlign: 'center' }}>
-                    <a href="https://dotcubelabs.com/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: 'none' }}>
-                        VISIT DOT CUBE LABS
-                    </a>
+                            <div className="alliance-body">
+                                <div className="alliance-top">
+                                    <div className="alliance-logo">
+                                        <img src={partner.logo} alt={partner.name} />
+                                    </div>
+                                    {partner.tag && <span className="alliance-tag">{partner.tag}</span>}
+                                </div>
+
+                                <h3 className="alliance-name">{partner.name}</h3>
+                                <p className="alliance-location">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                        <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" />
+                                        <circle cx="12" cy="10" r="2.5" />
+                                    </svg>
+                                    {partner.location}
+                                </p>
+
+                                <div className="alliance-desc">
+                                    {partner.description.map((para, j) => (
+                                        <p key={j}>{para}</p>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.article>
+                    ))}
                 </div>
             </div>
         </section>
