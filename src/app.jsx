@@ -60,8 +60,30 @@ function Cursor() {
   );
 }
 
+// Map the URL path to a view so /alliance can be linked and bookmarked
+const viewFromPath = () => {
+  const path = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+  return path === '/alliance' || path === '/alliances' ? 'alliances' : 'home';
+};
+
+const VIEW_PATHS = { home: '/', alliances: '/alliance' };
+
 function App() {
-  const [view, setView] = useState('home');
+  const [view, setView] = useState(viewFromPath);
+
+  const navigate = (next) => {
+    setView(next);
+    const path = VIEW_PATHS[next] || '/';
+    if (window.location.pathname !== path) {
+      window.history.pushState({ view: next }, '', path + window.location.hash);
+    }
+  };
+
+  useEffect(() => {
+    const onPop = () => setView(viewFromPath());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   const stampRef = useRef(null);
   const stampTextRef = useRef(null);
 
@@ -120,7 +142,7 @@ function App() {
 
       <div className="page-content">
         <ScrollRay />
-        <Nav onPageChange={setView} currentView={view} />
+        <Nav onPageChange={navigate} currentView={view} />
 
         {view === 'home' ? (
           <div key="home-view" className="home-content-wrap">
@@ -136,7 +158,7 @@ function App() {
             <CTA />
           </div>
         ) : (
-          <AlliancesPage key="alliances-view" onBack={() => setView('home')} />
+          <AlliancesPage key="alliances-view" onBack={() => navigate('home')} />
         )}
 
         <Footer />

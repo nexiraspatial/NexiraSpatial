@@ -212,7 +212,7 @@ function Nav({ onPageChange, currentView }) {
             {NAV_LINKS.map(id => (
               <a
                 key={id}
-                href={id === 'blog' || id === 'alliances' ? '#' : `#${id}`}
+                href={id === 'blog' ? '#' : id === 'alliances' ? '/alliance' : `#${id}`}
                 onClick={(e) => {
                   if (id === 'blog') { e.preventDefault(); return; }
                   if (id === 'alliances') { e.preventDefault(); onPageChange?.('alliances'); setMenuOpen(false); return; }
@@ -270,7 +270,7 @@ function Nav({ onPageChange, currentView }) {
                   {NAV_LINKS.map((id, i) => (
                     <motion.a
                       key={id}
-                      href={id === 'blog' || id === 'alliances' ? '#' : `#${id}`}
+                      href={id === 'blog' ? '#' : id === 'alliances' ? '/alliance' : `#${id}`}
                       onClick={(e) => {
                         if (id === 'blog') { e.preventDefault(); return; }
                         if (id === 'alliances') { e.preventDefault(); onPageChange?.('alliances'); setMenuOpen(false); return; }
