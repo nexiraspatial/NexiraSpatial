@@ -76,6 +76,10 @@ const SECTION_LABELS = {
   'contact': 'Connect'
 };
 
+// Nav links that open a separate page instead of scrolling to a home section
+const PAGE_LINKS = { products: { view: 'projects', href: '/projects' }, alliances: { view: 'alliances', href: '/alliance' } };
+const PAGE_LABELS = { projects: 'products', alliances: 'alliances' };
+
 function Nav({ onPageChange, currentView }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -98,10 +102,12 @@ function Nav({ onPageChange, currentView }) {
       window.removeEventListener('scroll', check);
       window.removeEventListener('resize', check);
     };
-  }, []);
+  }, [currentView]);
 
-  /* Track active section for mobile brand label */
+  /* Track active section for mobile brand label; re-run on page change so the
+     home sections are observed again after returning from a separate page */
   useEffect(() => {
+    setActiveSection('');
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -115,7 +121,7 @@ function Nav({ onPageChange, currentView }) {
       if (el) obs.observe(el);
     });
     return () => obs.disconnect();
-  }, []);
+  }, [currentView]);
 
   const smoothScroll = (e, id) => {
     const el = document.getElementById(id);
@@ -166,6 +172,10 @@ function Nav({ onPageChange, currentView }) {
                 width: 'auto'
               }}
             />
+            <span className="fbl-wm">
+              <span className="fbl-nexira">NEXIRA</span>
+              <span className="fbl-spatial">SPATIAL</span>
+            </span>
           </motion.a>
         )}
       </AnimatePresence>
@@ -199,9 +209,9 @@ function Nav({ onPageChange, currentView }) {
               >
                 <span className="wm-nexira">NEXIRA</span>
                 <small className="wm-spatial">SPATIAL</small>
-                {(currentView === 'alliances' ? 'alliances' : activeSection) && (
+                {(PAGE_LABELS[currentView] || activeSection) && (
                   <span className="wm-sec">
-                    {SECTION_LABELS[currentView === 'alliances' ? 'alliances' : activeSection] || activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+                    {SECTION_LABELS[PAGE_LABELS[currentView] || activeSection] || activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
                   </span>
                 )}
               </motion.div>
@@ -212,10 +222,10 @@ function Nav({ onPageChange, currentView }) {
             {NAV_LINKS.map(id => (
               <a
                 key={id}
-                href={id === 'blog' ? '#' : id === 'alliances' ? '/alliance' : `#${id}`}
+                href={id === 'blog' ? '#' : PAGE_LINKS[id]?.href || `#${id}`}
                 onClick={(e) => {
                   if (id === 'blog') { e.preventDefault(); return; }
-                  if (id === 'alliances') { e.preventDefault(); onPageChange?.('alliances'); setMenuOpen(false); return; }
+                  if (PAGE_LINKS[id]) { e.preventDefault(); onPageChange?.(PAGE_LINKS[id].view); setMenuOpen(false); return; }
                   onPageChange?.('home');
                   smoothScroll(e, id);
                 }}
@@ -270,10 +280,10 @@ function Nav({ onPageChange, currentView }) {
                   {NAV_LINKS.map((id, i) => (
                     <motion.a
                       key={id}
-                      href={id === 'blog' ? '#' : id === 'alliances' ? '/alliance' : `#${id}`}
+                      href={id === 'blog' ? '#' : PAGE_LINKS[id]?.href || `#${id}`}
                       onClick={(e) => {
                         if (id === 'blog') { e.preventDefault(); return; }
-                        if (id === 'alliances') { e.preventDefault(); onPageChange?.('alliances'); setMenuOpen(false); return; }
+                        if (PAGE_LINKS[id]) { e.preventDefault(); onPageChange?.(PAGE_LINKS[id].view); setMenuOpen(false); return; }
                         onPageChange?.('home');
                         smoothScroll(e, id);
                       }}
@@ -314,7 +324,7 @@ const SOCIALS = [
   { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61585941132696', d: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
 ];
 
-function Footer() {
+function Footer({ onNavigate }) {
   return (
     <footer>
       <div className="foot-top">
@@ -341,7 +351,7 @@ function Footer() {
           <h6>Company</h6>
           <ul>
             <li><a href="#about" onClick={(e) => { e.preventDefault(); const el = document.getElementById('about'); if (el) window.lenis?.scrollTo(el); }}>About</a></li>
-            <li><a href="#products" onClick={(e) => { e.preventDefault(); const el = document.getElementById('products'); if (el) window.lenis?.scrollTo(el); }}>Products</a></li>
+            <li><a href="/projects" onClick={(e) => { e.preventDefault(); onNavigate?.('projects'); }}>Products</a></li>
             <li><a href="#" onClick={(e) => e.preventDefault()}>Field Notes</a></li>
             <li><a href="#contact" onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) window.lenis?.scrollTo(el); }}>Careers</a></li>
           </ul>

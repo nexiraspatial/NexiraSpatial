@@ -9,8 +9,9 @@ import { Preloader } from './components/Preloader.jsx';
 
 import { Hero, About } from './sections/Hero.jsx';
 import { Services, Stats, Process, Industries } from './sections/Services.jsx';
-import { Cases, Tech, Testimonials, CTA } from './sections/Cases.jsx';
+import { Tech, Testimonials, CTA } from './sections/Cases.jsx';
 import { AlliancesPage } from './sections/Alliances.jsx';
+import { ProjectsPage } from './sections/Projects.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,13 +61,15 @@ function Cursor() {
   );
 }
 
-// Map the URL path to a view so /alliance can be linked and bookmarked
+// Map the URL path to a view so /alliance and /projects can be linked and bookmarked
 const viewFromPath = () => {
   const path = window.location.pathname.replace(/\/+$/, '').toLowerCase();
-  return path === '/alliance' || path === '/alliances' ? 'alliances' : 'home';
+  if (path === '/alliance' || path === '/alliances') return 'alliances';
+  if (path === '/projects' || path === '/products') return 'projects';
+  return 'home';
 };
 
-const VIEW_PATHS = { home: '/', alliances: '/alliance' };
+const VIEW_PATHS = { home: '/', alliances: '/alliance', projects: '/projects' };
 
 function App() {
   const [view, setView] = useState(viewFromPath);
@@ -106,8 +109,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (view === 'alliances') {
-      // Kill all scroll triggers only when entering Alliances to prevent pins from covering the screen
+    if (view !== 'home') {
+      // Kill all scroll triggers when leaving home to prevent pins from covering the screen
       ScrollTrigger.getAll().forEach(trigger => trigger.revert());
       ScrollTrigger.refresh();
     }
@@ -146,22 +149,23 @@ function App() {
 
         {view === 'home' ? (
           <div key="home-view" className="home-content-wrap">
-            <Hero />
+            <Hero onNavigate={navigate} />
             <About />
             <Services />
             <Stats />
             <Process />
             <Industries />
-            <Cases />
             <Tech />
             <Testimonials />
             <CTA />
           </div>
+        ) : view === 'projects' ? (
+          <ProjectsPage key="projects-view" onBack={() => navigate('home')} />
         ) : (
           <AlliancesPage key="alliances-view" onBack={() => navigate('home')} />
         )}
 
-        <Footer />
+        <Footer onNavigate={navigate} />
       </div>
 
       <div className="foot-silhouette">

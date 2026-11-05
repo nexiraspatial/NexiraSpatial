@@ -5,7 +5,7 @@ import { resolve } from 'node:path'
 
 // GitHub Pages serves only real files, so copy the app shell to each
 // client-side route (and 404.html as a fallback) to make deep links load
-const SPA_ROUTES = ['alliance']
+const SPA_ROUTES = ['alliance', 'projects']
 
 function spaRoutes() {
   return {

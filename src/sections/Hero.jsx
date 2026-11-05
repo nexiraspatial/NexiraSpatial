@@ -265,7 +265,7 @@ const NexiraVideoMask = ({ src }) => {
   );
 };
 
-function Hero() {
+function Hero({ onNavigate }) {
   const wrapRef = useRef(null);
   const heroRef = useRef(null);
   const satRef = useRef(null);
@@ -385,11 +385,10 @@ function Hero() {
                     Get Started
                   </BtnPrimary>
                   <BtnGhost
-                    href="#products"
+                    href="/projects"
                     onClick={(e) => {
                       e.preventDefault();
-                      const el = document.getElementById('products');
-                      if (el) window.lenis?.scrollTo(el);
+                      onNavigate?.('projects');
                     }}
                   >
                     View Our Work

@@ -176,102 +176,8 @@ function AtmosSky() {
 gsap.registerPlugin(ScrollTrigger);
 
 /* ============================================================
-   NEXIRA — Cases / Tech / Testimonials / Blog / CTA
+   NEXIRA — Tech / Testimonials / Blog / CTA
    ============================================================ */
-
-const CASES = [
-  {
-    num: '01 / 02', chip: 'HAZARD ANALYSIS / 2025',
-    title: 'Multi Hazard Dashboard',
-    body: 'An interactive risk intelligence platform for spatial hazard assessment — visualising multi-layered threat data, risk zones and analytical outputs for informed decision-making.',
-    meta: [['Type', 'Dashboard'], ['Domain', 'Hazard GIS'], ['Stack', 'MapLibre']],
-    img: '/case-hazard-dashboard.jpg',
-    url: 'https://nexira-spatial-map-service.vercel.app/',
-  },
-  {
-    num: '02 / 02', chip: 'WEB MAPPING / 2025',
-    title: 'GIS interactive webmap',
-    body: 'A live web mapping platform for real-time hazard visualisation — integrating spatial data layers, custom cartography and geospatial analysis accessible from any browser.',
-    meta: [['Type', 'Web Map'], ['Domain', 'Hazard GIS'], ['Stack', 'Leaflet']],
-    img: '/case-hazard-webmap.jpg',
-    url: 'https://web-map-v2.vercel.app/',
-  },
-];
-
-function Cases() {
-  const sectionRef = useRef(null);
-
-  return (
-    <section className="cases" id="products" data-screen-label="07 Products" ref={sectionRef}>
-      {CASES.map((c, i) => (
-        <div key={i} className="case-portal">
-          <div className="wrap portal-content" style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            gap: '32px',
-            paddingTop: 'clamp(140px, 15vh, 180px)',
-            paddingBottom: '80px',
-            display: 'flex',
-            flexDirection: 'column'
-          }}>
-            {/* Header Content */}
-            <div className="portal-head" style={{ textAlign: 'center', width: '100%', marginBottom: '20px' }}>
-              <Reveal>
-                <Eyebrow style={{ letterSpacing: '0.4em', justifyContent: 'center' }}>OUR PRODUCTS</Eyebrow>
-              </Reveal>
-            </div>
-
-            {/* The "Main Card" */}
-            <div className="portal-card-wrap" style={{ width: '100%', maxWidth: '1000px' }}>
-              <div className="portal-card-inner" style={{ maxHeight: '50vh', overflow: 'hidden', borderRadius: '12px' }}>
-                <img src={c.img} alt={c.title} className="portal-card-img" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-
-                {/* Centered Button Overlay (shows on hover) */}
-                <div className="portal-card-hover-overlay">
-                  <a href={c.url} target="_blank" rel="noopener noreferrer" className="portal-btn">
-                    LAUNCH PLATFORM
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Outside Bottom Content Area */}
-            <div className="portal-foot" style={{ textAlign: 'center', width: '100%', marginTop: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Reveal delay={100}>
-                <h2 className="portal-title" style={{
-                  fontSize: 'clamp(20px, 3.5vw, 32px)',
-                  color: '#fff',
-                  marginBottom: '12px',
-                  textTransform: 'uppercase'
-                }}>
-                  {c.title}
-                </h2>
-              </Reveal>
-              <Reveal delay={200}>
-                <p className="portal-desc" style={{
-                  maxWidth: '700px',
-                  color: 'rgba(255,255,255,0.75)',
-                  margin: '0 auto',
-                  fontSize: 'clamp(14px, 1.2vw, 16px)',
-                  lineHeight: '1.6'
-                }}>
-                  {c.body}
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      ))}
-    </section>
-  );
-}
-
-
-
 
 /* ============================================================
    TECH STACK
@@ -625,4 +531,4 @@ function CTA() {
   );
 }
 
-export { Cases, Tech, Testimonials, Blog, CTA };
+export { Tech, Testimonials, Blog, CTA };
