@@ -12,7 +12,7 @@ const projects = [
     },
     {
         name: 'GIS Interactive Webmap',
-        photo: '/case-hazard-webmap.jpg',
+        photo: '/web map.jpg',
         url: 'https://web-map-v2.vercel.app/',
         meta: [['Type', 'Web Map'], ['Domain', 'Hazard GIS'], ['Stack', 'Leaflet']],
         description: 'A live web mapping platform for real-time hazard visualisation — integrating spatial data layers, custom cartography and geospatial analysis accessible from any browser.'
@@ -103,7 +103,7 @@ export function ProjectsPage({ onBack }) {
                                 >
                                     <Eyebrow style={{ justifyContent: 'center', fontSize: '12px' }}>Projects</Eyebrow>
                                     <h1 className="display projects-title">
-                                        Our <span style={{ color: 'var(--accent)' }}>Work</span>
+                                        Our <span style={{ color: 'var(--accent)' }}>Works</span>
                                     </h1>
                                 </motion.header>
                             )}

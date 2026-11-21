@@ -391,7 +391,7 @@ function Hero({ onNavigate }) {
                       onNavigate?.('projects');
                     }}
                   >
-                    View Our Work
+                    View Our Works
                   </BtnGhost>
                 </div>
               )}

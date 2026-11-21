@@ -68,7 +68,7 @@ const SECTION_LABELS = {
   'services': 'Services',
   'process': 'Our Process',
   'industries': 'Industries',
-  'products': 'Our Work',
+  'products': 'Our Works',
   'tech': 'Tech Stack',
   'why-choose-us': 'Why Nexira',
   'blog': 'Field Notes',
